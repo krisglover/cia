@@ -30,7 +30,11 @@ public class ConfigureResource {
 	
 		logger.info("Environment : " + env);
 		
-		Map<String,String> configs = new HashMap<>();
+		//Create DAO
+		
+		//Call DAO and return configs
+		
+		Map<String,String> configs = new HashMap<String,String>();
 		configs.put("hello", "world");
 		configs.put("key1", "value1");
 		configs.put("key2", "value2");
@@ -51,7 +55,7 @@ public class ConfigureResource {
 		logger.info("Environment : " + env);
 		logger.info("Application : " + application);
 		
-		Map<String,String> configs = new HashMap<>();
+		Map<String,String> configs = new HashMap<String,String>();
 		configs.put("hello", "world");
 		configs.put("key1", "value1");
 		configs.put("key2", "value2");
