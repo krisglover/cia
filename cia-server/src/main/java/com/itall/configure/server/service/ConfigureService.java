@@ -1,8 +1,9 @@
 package com.itall.configure.server.service;
 
-import java.util.Map;
+import java.util.List;
 
 import com.itall.configure.server.exception.ConfiurationException;
+import com.itall.configure.server.models.Config;
 
 public interface ConfigureService {
 
@@ -13,6 +14,12 @@ public interface ConfigureService {
 	 * @param application
 	 * @return
 	 */
-	public Map<String,String> fetchConfigs(String environment,String application)  throws ConfiurationException;
+	public List<Config> fetchConfigs(String environment,String application)  throws ConfiurationException;
 	
+	/**
+	 * Upsert configurations
+	 * 
+	 * @param configs - The configuration values to update
+	 */
+	public void upsertConfigs(List<Config> configs);
 }

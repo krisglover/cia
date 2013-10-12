@@ -1,11 +1,12 @@
 package com.itall.configure.server.service;
 
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.util.StringUtils;
 
 import com.itall.configure.server.dao.ConfigurationDAO;
 import com.itall.configure.server.exception.ConfiurationException;
+import com.itall.configure.server.models.Config;
 
 /**
  * Default service implementation.
@@ -22,9 +23,9 @@ public class DefaultConfigureService implements ConfigureService{
 	}
 	
 	@Override
-	public Map<String, String> fetchConfigs(String environment, String application) throws ConfiurationException {
+	public List<Config> fetchConfigs(String environment, String application) throws ConfiurationException {
 
-		Map<String,String> configMap ; 
+		List<Config> configMap ; 
 		
 		if(!StringUtils.isEmpty(environment) && !StringUtils.isEmpty(application)){
 			configMap = this.configurationDAO.getByApplication(environment, application);
@@ -34,7 +35,13 @@ public class DefaultConfigureService implements ConfigureService{
 			throw new ConfiurationException("[environment : "+ environment + ", application : " + application +"] is not valid" +
 										 " You must provide a valid [environment] or [environment AND application]");
 		}
-		
 		return configMap;
+	}
+
+	@Override
+	public void upsertConfigs(List<Config> configs) {
+		for(Config config : configs){
+			this.configurationDAO.upsert(config);
+		}
 	}
 }

@@ -1,6 +1,8 @@
 package com.itall.configure.server.dao;
 
-import java.util.Map;
+import java.util.List;
+
+import com.itall.configure.server.models.Config;
 
 /**
  * DAO to get or update configuration values
@@ -15,7 +17,7 @@ public interface ConfigurationDAO {
 	 * @param environment
 	 * @return
 	 */
-	public Map<String,String> getByEnvironment(String environment);
+	public List<Config> getByEnvironment(String environment);
 	
 	/**
 	 * Get all configs for the specified environment with specific application overrides from the backing data store
@@ -23,25 +25,12 @@ public interface ConfigurationDAO {
 	 * @param application
 	 * @return
 	 */
-	public Map<String,String> getByApplication(String environment, String application);
+	public List<Config> getByApplication(String environment, String application);
 
 	/**
-	 * insert or update specified config by environment
-	 * 
-	 * @param key
-	 * @param value
-	 * @param environment
+	 * insert or update specified config 
+	 * @param config
 	 */
-	public void upsertByEnvironment(String key, String value, String environment);
+	public void upsert(Config config);
 	
-	/**
-	 * 
-	 * insert or update specified config by environment with special application override
-	 * 
-	 * @param key
-	 * @param value
-	 * @param environment
-	 * @param application
-	 */
-	public void upsertByApplication(String key, String value, String environment, String application);
 }

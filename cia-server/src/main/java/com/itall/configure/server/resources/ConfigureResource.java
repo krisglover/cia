@@ -1,6 +1,8 @@
 package com.itall.configure.server.resources;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.GET;
@@ -11,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.itall.configure.server.models.Config;
 
 
 @Path("/configuration")
@@ -26,7 +30,8 @@ public class ConfigureResource {
 	@GET
 	@Path("/{env}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Map<String,String> getEnvironmentalConfigs(@PathParam("env") String env){
+//	public Map<String,String> getEnvironmentalConfigs(@PathParam("env") String env){
+	public List<Config> getEnvironmentalConfigs(@PathParam("env") String env){
 	
 		logger.info("Environment : " + env);
 		
@@ -34,10 +39,10 @@ public class ConfigureResource {
 		
 		//Call DAO and return configs
 		
-		Map<String,String> configs = new HashMap<String,String>();
-		configs.put("hello", "world");
-		configs.put("key1", "value1");
-		configs.put("key2", "value2");
+		List<Config> configs = new ArrayList<Config>();
+		configs.add(new Config("one","oneValue","default"));
+		configs.add(new Config("two","twoValue"));
+		configs.add(new Config("three","threeValue","default"));
 		
 		return configs;	
 	}
