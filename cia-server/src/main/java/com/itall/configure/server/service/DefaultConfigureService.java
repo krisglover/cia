@@ -25,19 +25,17 @@ public class DefaultConfigureService implements ConfigureService{
 	@Override
 	public List<Config> fetchConfigs(String environment, String application) throws ConfiurationException {
 
-		List<Config> configMap ; 
-		
-		if(!StringUtils.isEmpty(environment) && !StringUtils.isEmpty(application)){
-			configMap = this.configurationDAO.getByApplication(environment, application);
-		}else if(!StringUtils.isEmpty(environment)){
-			configMap = this.configurationDAO.getByEnvironment(environment);
-		}else{
-			throw new ConfiurationException("[environment : "+ environment + ", application : " + application +"] is not valid" +
-										 " You must provide a valid [environment] or [environment AND application]");
-		}
-		return configMap;
+		List<Config> configs = this.configurationDAO.getByApplication(environment, application);
+		return configs;
 	}
 
+	@Override
+	public Config fetchConfig(String environment, String application,String name) throws ConfiurationException {
+		Config config = this.configurationDAO.getValue(environment, application, name);
+		return config;
+	}
+
+	
 	@Override
 	public void upsertConfigs(List<Config> configs) {
 		for(Config config : configs){

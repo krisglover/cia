@@ -16,6 +16,7 @@
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<spring.version>3.2.4.RELEASE</spring.version>
 		<joda.version>1.6</joda.version>
+		<mysql.version>5.1.26</mysql.version>
 		<junit.version>4.0</junit.version>
 	</properties>
 
@@ -31,6 +32,11 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.yammer.dropwizard</groupId>
 			<artifactId>dropwizard-core</artifactId>
 			<version>0.6.2</version>
@@ -39,6 +45,11 @@
 			<groupId>com.jolbox</groupId>
 			<artifactId>bonecp</artifactId>
 			<version>0.7.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
 		</dependency>
 	</dependencies>
 

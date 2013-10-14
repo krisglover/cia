@@ -26,6 +26,7 @@ public class SpringBootstrapService extends Service<CIAConfiguration> {
 		
 		//ENVIRONMENTAL CONFIGS
 		//configuration.getHttpConfiguration().setPort(port)
+		//TODO : get this working for container variables ,spring context, and mysql connection
 		
 		//APPLICATION PARAMETERS
 		// before we init the app context, we have to create a parent context with all the config objects others rely on to get initialized

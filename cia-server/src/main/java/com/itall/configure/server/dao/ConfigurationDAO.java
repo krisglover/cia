@@ -13,11 +13,14 @@ import com.itall.configure.server.models.Config;
 public interface ConfigurationDAO {
 	
 	/**
-	 * Get all configs for the specified environment from the backing data store
+	 * Get specific value based on the given parameters 
+	 * 
 	 * @param environment
+	 * @param application
+	 * @param name
 	 * @return
 	 */
-	public List<Config> getByEnvironment(String environment);
+	public Config getValue(String environment, String application,String name);
 	
 	/**
 	 * Get all configs for the specified environment with specific application overrides from the backing data store

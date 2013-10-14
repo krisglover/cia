@@ -14,24 +14,35 @@
 	default-init-method="initialize" default-destroy-method="destroy">
 
 	<!-- Resources -->
-	<bean id="configureResource" class="com.itall.configure.server.resources.ConfigureResource" />
+	<bean id="configureResource" class="com.itall.configure.server.resources.ConfigureResource">
+		<constructor-arg ref="configService"/>
+	</bean>
 
+	<!-- Serivces -->
+	<bean id="configService" class="com.itall.configure.server.service.DefaultConfigureService">
+		<constructor-arg ref="configDAO"/>
+	</bean>
+
+	<!-- DAOs -->
+	<bean id="configDAO" class="com.itall.configure.server.dao.DatabaseConfigurationDAO">
+		<constructor-arg ref="configDataSource" />
+	</bean>
 
 	<!-- BoneCP configuration -->
-<!-- 	<bean id="configDataSource" class="com.jolbox.bonecp.BoneCPDataSource" -->
-<!-- 		destroy-method="close"> -->
-<!-- 		<property name="driverClass" value="com.mysql.jdbc.Driver" /> -->
-<!-- 		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1/yourdb" /> -->
-<!-- 		<property name="username" value="root" /> -->
-<!-- 		<property name="password" value="abcdefgh" /> -->
-<!-- 		<property name="idleConnectionTestPeriod" value="60" /> -->
-<!-- 		<property name="idleMaxAge" value="240" /> -->
-<!-- 		<property name="maxConnectionsPerPartition" value="30" /> -->
-<!-- 		<property name="minConnectionsPerPartition" value="10" /> -->
-<!-- 		<property name="partitionCount" value="3" /> -->
-<!-- 		<property name="acquireIncrement" value="5" /> -->
-<!-- 		<property name="statementsCacheSize" value="100" /> -->
-<!-- 		<property name="releaseHelperThreads" value="3" /> -->
-<!-- 	</bean> -->
+	<bean id="configDataSource" class="com.jolbox.bonecp.BoneCPDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1/Configs" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+		<property name="idleConnectionTestPeriod" value="60" />
+		<property name="idleMaxAge" value="240" />
+		<property name="maxConnectionsPerPartition" value="30" />
+		<property name="minConnectionsPerPartition" value="10" />
+		<property name="partitionCount" value="3" />
+		<property name="acquireIncrement" value="5" />
+		<property name="statementsCacheSize" value="100" />
+		<property name="releaseHelperThreads" value="3" />
+	</bean>
 
 </beans>

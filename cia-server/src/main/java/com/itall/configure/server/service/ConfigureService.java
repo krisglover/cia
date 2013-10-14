@@ -17,6 +17,16 @@ public interface ConfigureService {
 	public List<Config> fetchConfigs(String environment,String application)  throws ConfiurationException;
 	
 	/**
+	 * Service method that fetches a specific config
+	 * @param environment
+	 * @param application
+	 * @param name
+	 * @return
+	 * @throws ConfiurationException
+	 */
+	public Config fetchConfig(String environment,String application, String name)  throws ConfiurationException;
+	
+	/**
 	 * Upsert configurations
 	 * 
 	 * @param configs - The configuration values to update
