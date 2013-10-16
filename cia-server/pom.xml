@@ -12,8 +12,8 @@
 	<name>Configure it all server</name>
 
 	<properties>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
 		<spring.version>3.2.4.RELEASE</spring.version>
 		<joda.version>1.6</joda.version>
 		<mysql.version>5.1.26</mysql.version>
@@ -21,6 +21,11 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.itall</groupId>
+			<artifactId>cia-client</artifactId>
+			<version>${parent.version}</version>			
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>

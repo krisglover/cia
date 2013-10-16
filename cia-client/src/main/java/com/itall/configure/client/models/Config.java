@@ -1,4 +1,4 @@
-package com.itall.configure.server.models;
+package com.itall.configure.client.models;
 
 public class Config {
 	

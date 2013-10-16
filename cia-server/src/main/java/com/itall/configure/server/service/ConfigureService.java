@@ -2,8 +2,8 @@ package com.itall.configure.server.service;
 
 import java.util.List;
 
+import com.itall.configure.client.models.Config;
 import com.itall.configure.server.exception.ConfiurationException;
-import com.itall.configure.server.models.Config;
 
 public interface ConfigureService {
 

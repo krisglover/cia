@@ -2,7 +2,7 @@ package com.itall.configure.server.dao;
 
 import java.util.List;
 
-import com.itall.configure.server.models.Config;
+import com.itall.configure.client.models.Config;
 
 /**
  * DAO to get or update configuration values

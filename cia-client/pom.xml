@@ -12,15 +12,38 @@
 	<name>Configure client</name>
 
 	<properties>
+		<!-- Important for generics support -->
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
-		<spring.version>3.2.4.RELEASE</spring.version>
+		<slf4j.version>1.7.4</slf4j.version>
+		<jersey-client.version>1.8</jersey-client.version>
+		<jackson.version>1.9.2</jackson.version>
 		<junit.version>4.0</junit.version>
 	</properties>
-	
-	<dependencies>
-	</dependencies>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey-client.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-jaxrs</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>

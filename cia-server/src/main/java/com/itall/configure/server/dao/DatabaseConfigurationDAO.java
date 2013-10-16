@@ -4,10 +4,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.itall.configure.server.models.Config;
+import com.itall.configure.client.models.Config;
 
 /**
  * Database backed implementation of {@link ConfigurationDAO}

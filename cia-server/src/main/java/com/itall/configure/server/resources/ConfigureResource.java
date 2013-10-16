@@ -11,10 +11,10 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.itall.configure.client.models.Config;
+import com.itall.configure.client.models.Response;
+import com.itall.configure.client.models.Status;
 import com.itall.configure.server.exception.ConfiurationException;
-import com.itall.configure.server.models.Config;
-import com.itall.configure.server.models.Response;
-import com.itall.configure.server.models.Status;
 import com.itall.configure.server.service.ConfigureService;
 
 @Path("/configuration")

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.util.StringUtils;
 
-import com.itall.configure.server.models.Config;
+import com.itall.configure.client.models.Config;
 
 /**
  * Resolves proper config value based on whether or not an override is present in result set.

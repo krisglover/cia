@@ -2,11 +2,9 @@ package com.itall.configure.server.service;
 
 import java.util.List;
 
-import org.springframework.util.StringUtils;
-
+import com.itall.configure.client.models.Config;
 import com.itall.configure.server.dao.ConfigurationDAO;
 import com.itall.configure.server.exception.ConfiurationException;
-import com.itall.configure.server.models.Config;
 
 /**
  * Default service implementation.
