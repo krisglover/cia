@@ -1,5 +1,11 @@
 package com.itall.configure.client.models;
 
+/**
+ * TODO : should consider making this immutable 
+ * 
+ * @author kglover
+ *
+ */
 public class Config {
 	
 	private String key;
@@ -48,5 +54,10 @@ public class Config {
 	}
 	public void setApplication(String application) {
 		this.application = application;
+	}
+
+	@Override
+	public String toString() {
+		return "Config [key=" + key + ", value=" + value + ", environment=" + environment + ", application=" + application + "]";
 	}
 }

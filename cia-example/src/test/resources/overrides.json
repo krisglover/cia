@@ -1,0 +1,10 @@
+[
+{
+    "key": "env",
+    "value": "override.jar"
+},
+{
+    "key":"timeoutMS",
+    "value":"-1"
+}
+]

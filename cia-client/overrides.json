@@ -1,0 +1,12 @@
+[
+{
+    "key": "jarName",
+    "value": "override.jar",
+    "environment": "prod",
+    "application": "ssa"
+},
+{
+    "key":"timeoutMS",
+    "value":"-1"
+}
+]

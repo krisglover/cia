@@ -1,22 +1,30 @@
-http:
-  rootPath: /myapp/services/rest/*
-  port: 8080
-  adminPort: 8081
-  requestLog:
-    console:
-      enabled: false
-    file:
-      enabled: false
-    syslog:
-      enabled: false
+serviceEnv : prod
+serviceApp : ciaServer
+springContextFile : ciaServerContext.xml
+
+localConfigs:
+    - {key: jarName, value: localOverrideJar, environment: prod, application: ssa}
+    - {key: ciaServerJDBCUrl, value: "jdbc:mysql://127.0.0.1/Configs"}
+    
+# http:
+#  rootPath: /myapp/services/rest/*
+#  port: 8080
+#  adminPort: 8081
+ # requestLog:
+ #   console:
+ #     enabled: false
+#    file:
+#      enabled: false
+#    syslog:
+#      enabled: false
 
 # Logging settings.
-logging:
+#logging:
   # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
-  level: ERROR
-  loggers:
-    "com.kg": ERROR
-    "com.kg.framework": INFO
-  console:
-    enabled: true
+ # level: ERROR
+ # loggers:
+ #   "com.kg": ERROR
+ #   "com.kg.framework": INFO
+ # console:
+ #   enabled: true
 
