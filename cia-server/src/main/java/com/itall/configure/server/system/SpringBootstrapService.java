@@ -10,17 +10,32 @@ import javax.ws.rs.ext.Provider;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.google.common.base.Optional;
 import com.itall.configure.client.Manager;
 import com.itall.configure.client.ResolvingManager;
+import com.itall.configure.client.models.User;
 import com.itall.configure.client.provider.ConfigProvider;
 import com.itall.configure.client.provider.LocalConfigProvider;
 import com.itall.configure.client.provider.RestConfigProvider;
 import com.itall.configure.spring.CIAPropertyPlaceholderConfigurer;
 import com.yammer.dropwizard.Service;
+import com.yammer.dropwizard.auth.AuthenticationException;
+import com.yammer.dropwizard.auth.Authenticator;
+import com.yammer.dropwizard.auth.basic.BasicAuthProvider;
+import com.yammer.dropwizard.auth.basic.BasicCredentials;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.tasks.Task;
 import com.yammer.metrics.core.HealthCheck;
+
+/**
+ * Generic DropWizard bootstrap service that integrates Spring and a CIA property configurer
+ * 
+ * @author kglover
+ *
+ */
+
+//TODO : externalize this. It's a generic service class that can be reused.
 
 public class SpringBootstrapService extends Service<CIAConfiguration> {
 
@@ -35,15 +50,18 @@ public class SpringBootstrapService extends Service<CIAConfiguration> {
 
 		// ENVIRONMENTAL CONFIGS
 		// configuration.getHttpConfiguration().setPort(port)
-
+		
 		// APPLICATION PARAMETERS
 
 		//NOTE: If there are objects that need to be consumed by the application we can create a parent context that makes the configuration available.
 		
-		@SuppressWarnings("resource")
-		// Suppressing because the resource is properly deconstructed via the shutdown hook. The compiler can't see that
 		// NOTE : we're intentionally using the default constructor so that the container does not call #refresh immediately. 
 		// We need to inject the property configurer first
+		
+		//TODO : need to put a different auth provider in here
+	    environment.addProvider(new BasicAuthProvider<User>(new SimpleAuthenticator(), "Auth provider"));
+		
+		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
 		ctx.setConfigLocation(configuration.getSpringContextFile());
 
@@ -89,9 +107,25 @@ public class SpringBootstrapService extends Service<CIAConfiguration> {
 		for (Map.Entry<String, Object> entry : providers.entrySet()) {
 			environment.addProvider(entry.getValue());
 		}
+		
+		//TODO : figure out if I should add InjectableProviders for auth reasons
+//		Map<String, Object> injectableProviders = ctx.getBeansOfType(Provider.class);
+//		for (Map.Entry<String, Object> entry : providers.entrySet()) {
+//			environment.addProvider(entry.getValue());
+//		}
 	}
 
 	public static void main(String[] args) throws Exception {
 		new SpringBootstrapService().run(args);
+	}
+	
+	private static class SimpleAuthenticator implements Authenticator<BasicCredentials, User> {
+	    @Override
+	    public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException {
+	        if ("secret".equals(credentials.getPassword())) {
+	            return Optional.of(new User(credentials.getUsername()));
+	        }
+	        return Optional.absent();
+	    }
 	}
 }

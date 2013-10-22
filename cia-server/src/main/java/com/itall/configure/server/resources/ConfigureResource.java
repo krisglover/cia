@@ -14,8 +14,10 @@ import org.slf4j.LoggerFactory;
 import com.itall.configure.client.models.Config;
 import com.itall.configure.client.models.Response;
 import com.itall.configure.client.models.Status;
+import com.itall.configure.client.models.User;
 import com.itall.configure.server.exception.ConfiurationException;
 import com.itall.configure.server.service.ConfigureService;
+import com.yammer.dropwizard.auth.Auth;
 
 @Path("/configuration")
 public class ConfigureResource {
@@ -71,7 +73,7 @@ public class ConfigureResource {
 	@GET
 	@Path("/{env}/{application}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getApplicationConfigs(@PathParam("env") String env, @PathParam("application") String application) throws ConfiurationException {
+	public Response getApplicationConfigs(@Auth(required=true) User user, @PathParam("env") String env, @PathParam("application") String application) throws ConfiurationException {
 
 		logger.info("Environment : " + env);
 		logger.info("Application : " + application);

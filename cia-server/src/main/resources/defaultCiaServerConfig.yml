@@ -5,6 +5,15 @@ springContextFile : ciaServerContext.xml
 localConfigs:
     - {key: jarName, value: localOverrideJar, environment: prod, application: ssa}
     - {key: ciaServerJDBCUrl, value: "jdbc:mysql://127.0.0.1/Configs"}
+
+# Sample ssl keystore    
+http:
+  connectorType: NONBLOCKING_SSL
+  ssl:
+    keyStore: src/main/resources/example.keystore
+    keyStorePassword: example
+    
+    
     
 # http:
 #  rootPath: /myapp/services/rest/*

@@ -1,5 +1,8 @@
-- blank out or encrypt passwords. May need to add field in database. certificate SSL 
-- figure out how to inject values at the framework level
-- build property configurer
+- encrypt passwords stored in DB. May need to add field in database. 
 - build error registry service
 - add metrics
+
+X Setup authentication over ssl
+X figure out how to inject values at the framework level
+X build property configurer
+X  enable SSL 
