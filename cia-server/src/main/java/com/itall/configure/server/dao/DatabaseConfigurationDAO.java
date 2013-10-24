@@ -44,7 +44,23 @@ public class DatabaseConfigurationDAO implements ConfigurationDAO {
 
 	@Override
 	public void upsert(Config config) {
-		throw new RuntimeException("not implemented yet...oops");
-
+//		String key = config.getKey();
+//		List<Config> configs = jdbcTemplate.query(getSpecificValue, new ResolvingConfigMapper(), null, null, null, key);
+//		if(configs.size() == 1)
+		 
+		if(config.getEnvironment() == null && config.getApplication() == null){
+			// upsert to global only
+		}else if(config.getEnvironment() != null && config.getApplication() == null){
+			// upsert to global to ensure a default is provided
+			// upsert  value to environment table 
+		}else if(config.getEnvironment() != null && config.getApplication() != null){
+			// upsert to global to ensure a default is provided
+			// upsert value to application table 
+		}else{
+			//not a valid combination of environment and application so no updates should be made and an exception should be thrown
+			//TODO : better exception then this garbage
+			throw new RuntimeException("bad combination of parameters : [" + config.getEnvironment() +","
+						+config.getApplication() + "] are not valid " );
+		}
 	}
 }

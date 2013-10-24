@@ -1,6 +1,7 @@
 - encrypt passwords stored in DB. May need to add field in database. 
 - build error registry service
 - add metrics
+- add post mechanism
 
 X Setup authentication over ssl
 X figure out how to inject values at the framework level
