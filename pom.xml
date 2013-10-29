@@ -21,16 +21,23 @@
 	<name>Configure it all</name>
 
 	<build>
-<!-- 		<plugins> -->
-<!-- 			<plugin> -->
-<!-- 				<groupId>com.atlassian.maven.plugins</groupId> -->
-<!-- 				<artifactId>maven-jgitflow-plugin</artifactId> -->
-<!-- 				<version>1.0-alpha21.1</version> -->
-<!-- 				<configuration> -->
-<!-- 					see goals wiki page for configuration options -->
-<!-- 				</configuration> -->
-<!-- 			</plugin> -->
-<!-- 		</plugins> -->
+		<plugins>
+			<plugin>
+				<groupId>com.atlassian.maven.plugins</groupId>
+				<artifactId>maven-jgitflow-plugin</artifactId>
+				<version>1.0-alpha21.1</version>
+				<configuration>
+<!-- 					<flowInitContext> -->
+<!-- 						<masterBranchName>master</masterBranchName> -->
+<!-- 						<developBranchName>development</developBranchName> -->
+<!-- 						<featureBranchPrefix>feature-</featureBranchPrefix> -->
+<!-- 						<releaseBranchPrefix>release-</releaseBranchPrefix> -->
+<!-- 						<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix> -->
+<!-- 						<versionTagPrefix></versionTagPrefix> -->
+<!-- 					</flowInitContext> -->
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>
