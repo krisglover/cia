@@ -41,20 +41,20 @@ public class ConfigureResource {
 	 * @throws ConfiurationException
 	 */
 	@GET
-	@Path("/{env}/{app}/{name}")
+	@Path("/{env}/{app}/{key}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getSpecificConfig(@PathParam("env") String env, @PathParam("appl") String application, @PathParam("name") String name)
+	public Response getSpecificConfig(@PathParam("env") String env, @PathParam("appl") String application, @PathParam("key") String key)
 			throws ConfiurationException {
 
-		// TODO : handle errors better here. If nothing found for the specified name should respond with error or something other then 500
+		// TODO : handle errors better here. If nothing found for the specified key should respond with error or something other then 500
 
 		logger.info("Environment : " + env);
 		logger.info("Application : " + application);
-		logger.info("Name : " + name);
+		logger.info("key : " + key);
 
 		Response response = new Response();
 		try {
-			Config config = configureService.fetchConfig(env, application, name);
+			Config config = configureService.fetchConfig(env, application, key);
 			response.setData(config);
 			response.setStatus(Status.SUCCESS.toString());
 		} catch (Exception e) {
@@ -103,9 +103,9 @@ public class ConfigureResource {
 	 * @return
 	 */
 	@POST
-	@Path("/{env}/{app}/{name}")
+	@Path("/{env}/{app}/{key}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response upsertEnvAppConfig(@Auth(required = true) User user, @PathParam("env") String env, @PathParam("app") String application,@PathParam("name") String name, Config config){
+	public Response upsertEnvAppConfig(@Auth(required = true) User user, @PathParam("env") String env, @PathParam("app") String application,@PathParam("key") String key, Config config){
 		
 		//Rules - if global isn't defined it's defaulted to null
 		//		- if environment isn't defined it's defaulted to null
@@ -129,15 +129,16 @@ public class ConfigureResource {
 	 * @return
 	 */
 	@POST
-	@Path("/{env}/{name}")
+	@Path("/{env}/{key}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response upsertEnvironmentConfig(@Auth(required = true) User user, @PathParam("env") String env,@PathParam("name") String name, Config config){
+	public Response upsertEnvironmentConfig(@Auth(required = true) User user, @PathParam("env") String env,@PathParam("key") String key, Config config){
 		
 		//Rules - if global isn't defined it's defaulted to null
 		//		- if environment isn't defined it's defaulted to null
 		//	Each finer config must have a parent value defined
 		
 		Response response = new Response();
+		
 		
 		//Use values in config to push 
 		// OR use values in path
@@ -155,9 +156,9 @@ public class ConfigureResource {
 	 * @return
 	 */
 	@POST
-	@Path("/{name}")
+	@Path("/{key}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response upsertGlobalConfig(@Auth(required = true) User user,@PathParam("name") String name, Config config){
+	public Response upsertGlobalConfig(@Auth(required = true) User user,@PathParam("key") String key, Config config){
 		
 		//Rules - if global isn't defined it's defaulted to null
 		//		- if environment isn't defined it's defaulted to null
@@ -167,7 +168,8 @@ public class ConfigureResource {
 		
 		//Use values in config to push 
 		// OR use values in path
-		Config configToUpsert = new Config(name,config.getValue());
+		//Throw some sort of exception if there's a mismatch between key and key
+		Config configToUpsert = new Config(key,config.getValue());
 		
 		configureService.upsertConfigs(Collections.singletonList(configToUpsert));
 		

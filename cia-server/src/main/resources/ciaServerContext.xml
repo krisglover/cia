@@ -17,6 +17,9 @@
 	<bean id="configureResource" class="com.itall.configure.server.resources.ConfigureResource">
 		<constructor-arg ref="configService"/>
 	</bean>
+	
+	<!-- Providers -->
+	<bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider" />
 
 	<!-- Serivces -->
 	<bean id="configService" class="com.itall.configure.server.service.DefaultConfigureService">

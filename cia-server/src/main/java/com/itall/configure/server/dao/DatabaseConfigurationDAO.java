@@ -26,6 +26,14 @@ public class DatabaseConfigurationDAO implements ConfigurationDAO {
 
 	private final String getSpecificValue = getAllWithOverrides + " where ge.name = ?";
 
+	//This update will ensure a global value exists for the specified key. If one doesn't exist it will be created. 
+	private final String globalKeyEnforcement = "INSERT INTO Global(name,value) VALUES (?,null) ON DUPLICATE KEY UPDATE name=name";
+	
+	//These will upsert values in respective tables
+	private final String mysqlGlobalUpsert = "INSERT INTO Global(name,value) VALUES (?,?) ON DUPLICATE KEY UPDATE value=?";
+	private final String mysqlEnvUpsert = "INSERT INTO EnvironmentOverrides(name,value,environment) VALUES (?,?,?) ON DUPLICATE KEY UPDATE value=?";
+	private final String mysqlAppUpsert = "INSERT INTO ApplicationOverrides(name,value,environment,application) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE value=?";
+	
 	public DatabaseConfigurationDAO(DataSource datasource) {
 		this.jdbcTemplate = new JdbcTemplate(datasource);
 	}
@@ -44,18 +52,16 @@ public class DatabaseConfigurationDAO implements ConfigurationDAO {
 
 	@Override
 	public void upsert(Config config) {
-//		String key = config.getKey();
-//		List<Config> configs = jdbcTemplate.query(getSpecificValue, new ResolvingConfigMapper(), null, null, null, key);
-//		if(configs.size() == 1)
-		 
+		
+		//resolve how config should be inserted into Database. This needs to be atomic because multiple services may be writing concurrently
 		if(config.getEnvironment() == null && config.getApplication() == null){
-			// upsert to global only
+			jdbcTemplate.update(mysqlGlobalUpsert, config.getKey(),config.getValue(),config.getValue());
 		}else if(config.getEnvironment() != null && config.getApplication() == null){
-			// upsert to global to ensure a default is provided
-			// upsert  value to environment table 
+			jdbcTemplate.update(globalKeyEnforcement, config.getKey());
+			jdbcTemplate.update(mysqlEnvUpsert, config.getKey(),config.getValue(),config.getEnvironment(),config.getValue());
 		}else if(config.getEnvironment() != null && config.getApplication() != null){
-			// upsert to global to ensure a default is provided
-			// upsert value to application table 
+			jdbcTemplate.update(globalKeyEnforcement, config.getKey());
+			jdbcTemplate.update(mysqlAppUpsert, config.getKey(),config.getValue(),config.getEnvironment(),config.getApplication(),config.getValue());
 		}else{
 			//not a valid combination of environment and application so no updates should be made and an exception should be thrown
 			//TODO : better exception then this garbage
