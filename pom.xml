@@ -12,6 +12,7 @@
 		<spring.version>3.2.4.RELEASE</spring.version>
 	</properties>
 
+
 	<modules>
 		<module>cia-server</module>
 		<module>cia-client</module>
