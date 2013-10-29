@@ -3,7 +3,7 @@
 
 	<groupId>com.itall</groupId>
 	<artifactId>configure</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -11,7 +11,6 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<spring.version>3.2.4.RELEASE</spring.version>
 	</properties>
-
 
 	<modules>
 		<module>cia-server</module>
