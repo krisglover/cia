@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>com.itall</groupId>
 			<artifactId>cia-client</artifactId>
-			<version>${parent.version}</version>			
+			<version>${project.parent.version}</version>			
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

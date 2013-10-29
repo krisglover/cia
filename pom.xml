@@ -26,14 +26,7 @@
 				<artifactId>maven-jgitflow-plugin</artifactId>
 				<version>1.0-alpha21.1</version>
 				<configuration>
-<!-- 					<flowInitContext> -->
-<!-- 						<masterBranchName>master</masterBranchName> -->
-<!-- 						<developBranchName>development</developBranchName> -->
-<!-- 						<featureBranchPrefix>feature-</featureBranchPrefix> -->
-<!-- 						<releaseBranchPrefix>release-</releaseBranchPrefix> -->
-<!-- 						<hotfixBranchPrefix>hotfix-</hotfixBranchPrefix> -->
-<!-- 						<versionTagPrefix></versionTagPrefix> -->
-<!-- 					</flowInitContext> -->
+					<noDeploy>true</noDeploy>
 				</configuration>
 			</plugin>
 		</plugins>
