@@ -26,6 +26,7 @@
 				<version>1.0-alpha21.1</version>
 				<configuration>
 					<noDeploy>true</noDeploy>
+					<releaseBranchVersionSuffix>RC</releaseBranchVersionSuffix>
 				</configuration>
 			</plugin>
 		</plugins>
