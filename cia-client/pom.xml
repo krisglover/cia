@@ -52,6 +52,26 @@
 
 	<build>
 		<plugins>
+		<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<goals>
+					<goal>package</goal>
+				</goals>
+				<configuration>
+					<archive>
+						<index>true</index>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+						<manifestEntries>
+							<appVersion>${project.parent.version}</appVersion>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		
 		</plugins>
 	</build>
 
