@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -6,7 +7,8 @@
 		<artifactId>configure</artifactId>
 		<version>0.2.0-SNAPSHOT</version>
 	</parent>
-
+	
+	<packaging>jar</packaging>
 	<artifactId>cia-server</artifactId>
 	<name>Configure it all server</name>
 
@@ -23,7 +25,7 @@
 		<dependency>
 			<groupId>com.itall</groupId>
 			<artifactId>cia-client</artifactId>
-			<version>${project.parent.version}</version>			
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -65,26 +67,6 @@
 
 	<build>
 		<plugins>
-				<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<goals>
-					<goal>package</goal>
-				</goals>
-				<configuration>
-					<archive>
-						<index>true</index>
-						<manifest>
-							<addClasspath>true</addClasspath>
-						</manifest>
-						<manifestEntries>
-							<appVersion>${project.parent.version}</appVersion>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -110,8 +92,10 @@
 						</goals>
 						<configuration>
 							<transformers>
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>com.itall.configure.server.system.SpringBootstrapService</mainClass>
 								</transformer>
 							</transformers>
